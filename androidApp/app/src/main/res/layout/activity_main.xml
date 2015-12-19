@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <!-- include标签内不能设置RelativeLayout属性，
+    如android:layout_alignParentBottom,因为不起作用 -->
+    <!-- include标签内设置id属性后(android:id)，
+    其引用的布局layout内的id属性就不起作用了，
+    怀疑是其引用的layout外层包裹了一层include标签
+        或者是覆盖了其内的属性id-->
+    <!-- 如果没有include标签，所有布局代码都写在一个xml
+    文件中，界面会显得很冗余，可读性很差。而且界面加载的时
+    候是按照顺序加载的，前面的布局不能
+        调用其后面的布局id。而采用include后，一个include中
+        可以引用其后的include中的布局id属性 -->
+    <include layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </include>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
+
+</android.support.v4.widget.DrawerLayout>
